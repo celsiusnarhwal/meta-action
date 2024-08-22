@@ -17,6 +17,5 @@ runs:
         images: |
           ${{ github.repository }}
         tags: |
-          type=${{ inputs.type }},pattern=v{{version}}
           type=${{ inputs.type }},pattern=v{{major}}
           

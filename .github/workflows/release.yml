@@ -1,0 +1,16 @@
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Generate Tag
+        uses: celsiusnarhwal/meta-action@main
+        with:
+          type: pep440
