@@ -1,0 +1,22 @@
+name: Metadata Action
+description: placeholder
+branding:
+  icon: arrow-right-circle
+  color: gray-dark
+inputs:
+  type:
+    description: The format your version tag matches. Must be either "semver" (e.g., v1.2.3) or "pep440" (e.g., 1.2.3).
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Generate Tag
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          ${{ github.repository }}
+        tags: |
+          type=${{ inputs.type }},pattern=v{{version}}
+          type=${{ inputs.type }},pattern=v{{major}}
+          
