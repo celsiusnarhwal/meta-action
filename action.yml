@@ -3,10 +3,6 @@ description: placeholder
 branding:
   icon: arrow-right-circle
   color: gray-dark
-inputs:
-  type:
-    description: The format your version tag matches. Must be either "semver" (e.g., v1.2.3) or "pep440" (e.g., 1.2.3).
-    required: true
 
 runs:
   using: composite
@@ -27,6 +23,8 @@ runs:
       shell: bash
       run: |
         git tag -f ${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
-        git push
+        git push origin HEAD:$(gh repo view --json defaultBranchRef -q .defaultBranchRef.name)
+      env:
+        GH_TOKEN: ${{ github.token }}
         
           
