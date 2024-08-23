@@ -17,7 +17,7 @@ runs:
         images: |
           ${{ github.repository }}
         tags: |
-          type=${{ inputs.type }},pattern=v{{major}}
+          type=semver,pattern=v{{major}}
 
     - name: Push Tag
       shell: bash
