@@ -20,8 +20,10 @@ runs:
         tags: |
           type=${{ inputs.type }},pattern=v{{major}}
 
-    - name: Echo Tag
+    - name: Push Tag
       shell: bash
-      run: echo ${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
+      run: |
+        git tag -f ${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
+        git push
         
           
