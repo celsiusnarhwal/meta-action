@@ -12,10 +12,26 @@ runs:
   using: composite
   steps:
     - name: Generate Tag
+      id: meta
       uses: docker/metadata-action@v5
       with:
         images: |
           ${{ github.repository }}
         tags: |
           type=${{ inputs.type }},pattern=v{{major}}
+
+    - name: Retrieve Tag
+      id: tag
+      shell: python
+      run: |
+        import os
+        
+        print(f"tag={os.getenv('TAG').split(':')[1]}", file=open(os.getenv("GITHUB_OUTPUT"), "a"))
+      env:
+        TAG: ${{ steps.meta.outputs.tags }}
+
+    - name: Echo Tag
+      run: echo ${{ steps.tag.outputs.tag }}
+
+        
           
