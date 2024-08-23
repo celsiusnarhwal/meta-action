@@ -31,6 +31,7 @@ runs:
         TAG: ${{ steps.meta.outputs.tags }}
 
     - name: Echo Tag
+      shell: bash
       run: echo ${{ steps.tag.outputs.tag }}
 
         
