@@ -26,8 +26,7 @@ runs:
         tag=${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
         
         git tag -f ${tag}
-        git push -d origin ${branch} ${tag} || :
-        git push origin HEAD:${branch} tag ${tag}
+        git push -f --tags origin HEAD:${branch}
       env:
         GH_TOKEN: ${{ github.token }}
         
