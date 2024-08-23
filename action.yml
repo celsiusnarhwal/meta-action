@@ -22,9 +22,12 @@ runs:
     - name: Push Tag
       shell: bash
       run: |
-        git tag -f ${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
-        git push -d origin $(gh repo view --json defaultBranchRef -q .defaultBranchRef.name) ${{ env.DOCKER_METADATA_OUTPUT_VERSION }} || :
-        git push origin HEAD:$(gh repo view --json defaultBranchRef -q .defaultBranchRef.name) tag ${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
+        branch=$(gh repo view --json defaultBranchRef -q .defaultBranchRef.name)
+        tag=${{ env.DOCKER_METADATA_OUTPUT_VERSION }}
+        
+        git tag -f ${tag}
+        git push -d origin ${branch} ${tag} || :
+        git push origin HEAD:${branch} tag ${tag}
       env:
         GH_TOKEN: ${{ github.token }}
         
