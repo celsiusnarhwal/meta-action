@@ -15,5 +15,3 @@ jobs:
 
       - name: Generate Tag
         uses: celsiusnarhwal/meta-action@main
-        with:
-          type: pep440
