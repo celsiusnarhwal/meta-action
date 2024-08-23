@@ -11,6 +11,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
     - name: Generate Tag
       id: meta
       uses: docker/metadata-action@v5
